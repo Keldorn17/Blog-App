@@ -6,7 +6,6 @@ from flask_gravatar import Gravatar
 from functools import wraps
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import date
-from send_email import SendEmail
 from forms import MakePost, RegisterForm, LoginForm, CommentForm
 from database import db, Database, BlogPost, User, Comment
 from dotenv import load_dotenv
@@ -132,9 +131,6 @@ def about():
 @app.route('/contact', methods=['GET', 'POST'])
 def contact():
     if request.method == 'POST':
-        # Sending email is disabled due to prevent spamming emails.
-        # send_email: SendEmail = SendEmail(request.form)
-        # send_email.send_email()
         return render_template("contact.html", msg_sent=True, logged_in=current_user.is_authenticated)
     return render_template("contact.html", msg_sent=False, logged_in=current_user.is_authenticated)
 
